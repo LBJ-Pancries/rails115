@@ -13,13 +13,14 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.save
+    # @group.save
     # flash[:notice] = "New Success"
     if @group.save
       redirect_to groups_path notice: "New Success"
     else
       render :new
     end
+    # redirect_to groups_path notice: "New Success"
   end
   # 实作看板的“编辑” edit / update
   def edit
@@ -28,9 +29,14 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    @group.update(group_params)
+    # @group.update(group_params)
+    if @group.update(group_params)
+      redirect_to groups_path, notice: "Update Success"
+    else
+      render :edit
+    end
     # flash[:notice] = "Update Success"
-    redirect_to groups_path, notice: "Update Success"
+    # redirect_to groups_path, notice: "Update Success"
   end
 
   def destroy

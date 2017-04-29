@@ -2,7 +2,8 @@
     <h2>新增讨论版</h2>
 
     <hr>
-    <%= form_for @group do |f| %>
+    <%= render "form"%>
+    <!-- <%= form_for @group do |f| %>
 
     <% if @group.errors.any? %>
       <ul>
@@ -22,6 +23,6 @@
     <br>
 
     <%= f.submit "Submit", :disable_with => 'Submiting...' %>
-    <% end %>
+    <% end %> -->
 
 </div>

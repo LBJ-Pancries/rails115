@@ -14,8 +14,12 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.save
-
-    redirect_to groups_path
+    # flash[:notice] = "New Success"
+    if @group.save
+      redirect_to groups_path notice: "New Success"
+    else
+      render :new
+    end
   end
   # 实作看板的“编辑” edit / update
   def edit
@@ -25,8 +29,15 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     @group.update(group_params)
-
+    # flash[:notice] = "Update Success"
     redirect_to groups_path, notice: "Update Success"
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    # flash[:alert] = "Group deleted"
+    redirect_to groups_path, alert: "Group deleted"
   end
 
   private

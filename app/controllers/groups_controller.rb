@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts
+    @posts = @group.posts.order("created_at DESC")
   end
   # 实作看板的“新增” new / create
   def new

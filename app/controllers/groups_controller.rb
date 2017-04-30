@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts.recent
+    @posts = @group.posts.recent.paginate(:page => params[:page], :per_page => 5)
   end
   # 实作看板的“新增” new / create
   def new

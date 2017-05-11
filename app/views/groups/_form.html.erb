@@ -3,5 +3,15 @@
     <%= f.input :title, input_html: { class: "form-control"} %>
     <%= f.input :description, input_html: { class: "form-control"} %>
   </div>
+
+  <% if @group.image.present? %>
+    <span>目前电影海报</span> <br>
+    <%= image_tag(@group.image.thum.url) %>
+  <% end %>
+
+  <div class="group">
+    <%= f.input :image, as: :file %>
+  </div>
+  
   <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submiting..." } %>
 <% end %>

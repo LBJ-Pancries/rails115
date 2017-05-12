@@ -1,6 +1,11 @@
 <div class="col-md-4 col-md-offset-4">
   <h2>编辑讨论版</h2>
   <hr>
+  <% if @group.image.present? %>
+   <span>目前图片</span>
+   <br>
+   <%= image_tag(@group.image.thumb.url) %>
+  <% end %>
   <%= render "form"%>
   <!-- <%= form_for @group do |f| %>
 

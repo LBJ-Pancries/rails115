@@ -1,9 +1,14 @@
+<h2 class="text-center"> 我加入的讨论版 </h2>
+<div class="pull-right" style="padding-bottom: 20px;">
+  <%= link_to("新增产品", new_account_group_path, class: "btn btn-primary btn-sm") %>
+</div>
 <div class="col-md-12">
-  <h2 class="text-center"> 我加入的讨论版 </h2>
-  <table class="table">
+
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th> # </th>
+        <th width="150">Group Pic</th>
         <th> Title </th>
         <th> Description </th>
         <th> Post Count </th>
@@ -12,9 +17,20 @@
     </thead>
 
     <tbody>
+
       <% @groups.each do |group| %>
+
         <tr>
-          <td> # </td>
+          <td> <%= group.id %> </td>
+          <td>
+            <%= link_to group_path(group) do %>
+              <% if group.image.present? %>
+                <%= image_tag(group.image.thumb.url, class: "thumbnail") %>
+              <% else %>
+                <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+              <% end %>
+            <% end %>
+          </td>
           <td> <%= link_to(group.title, group_path(group)) %> </td>
           <td> <%= group.description %> </td>
           <td> <%= group.posts.count %> </td>

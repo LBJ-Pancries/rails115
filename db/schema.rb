@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512063142) do
+ActiveRecord::Schema.define(version: 20170511090957) do
 
   create_table "group_relationships", force: :cascade do |t|
     t.integer  "group_id"

@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :validate_search_key, only: [:search]
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy, :join, :quit]
   before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
   def index
@@ -66,6 +67,24 @@ class GroupsController < ApplicationController
     end
 
     redirect_to group_path(@group)
+  end
+
+  def search
+    if @query_string.present?
+      search_result = Group.ransack(@search_criteria).result(:distinct => true)
+      @groups = search_result.paginate(:page => params[:page], :per_page => 5 )
+    end
+  end
+
+  protected
+
+  def validate_search_key
+    @query_string = params[:q].gsub(/\\|\'|\/|\?/, "") if params[:q].present?
+    @search_criteria = search_criteria(@query_string)
+  end
+
+  def search_criteria(query_string)
+    { :title_cont => query_string }
   end
 
   private
